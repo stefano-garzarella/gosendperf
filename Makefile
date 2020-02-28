@@ -9,11 +9,11 @@ build: $(BINS)
 build-%: bin/%
 	@true
 
-run-%: cmd/%/main.go
-	go run $<
+run-%: cmd/%/*.go
+	go run $^
 
-bin/%: cmd/%/main.go
-	go build -o $@ $<
+bin/%: cmd/%/*.go
+	go build -o $@ $^
 
 clean:
 	rm $(BINS)

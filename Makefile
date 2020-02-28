@@ -6,6 +6,9 @@ all: build
 
 build: $(BINS)
 
+build-%: bin/%
+	@true
+
 run-%: cmd/%/main.go
 	go run $<
 

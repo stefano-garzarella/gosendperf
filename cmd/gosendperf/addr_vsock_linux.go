@@ -1,3 +1,5 @@
+// +build linux
+
 package main
 
 import (
@@ -9,15 +11,15 @@ import (
 )
 
 type VsockAddr struct {
-	fd int
+	fd  int
 	svm unix.SockaddrVM
 }
 
-func (va *VsockAddr) parse(addr string) (error) {
+func (va *VsockAddr) parse(addr string) error {
 	fmt.Println(addr)
 
 	parsed := strings.Split(addr, ":")
-	if (len(parsed) != 2) {
+	if len(parsed) != 2 {
 		return fmt.Errorf("Expected cid:port")
 	}
 
@@ -36,7 +38,7 @@ func (va *VsockAddr) parse(addr string) (error) {
 	return nil
 }
 
-func (va *VsockAddr) Connect(addr string) (error) {
+func (va *VsockAddr) Connect(addr string) error {
 	var err error
 
 	err = va.parse(addr)
@@ -52,17 +54,17 @@ func (va *VsockAddr) Connect(addr string) (error) {
 	return nil
 }
 
-func (va *VsockAddr) Listen(addr string) (error) {
+func (va *VsockAddr) Listen(addr string) error {
 	return nil
 }
 
-func (va *VsockAddr) GetFD() (int) {
+func (va *VsockAddr) GetFD() int {
 	return va.fd
 }
 
 func (va *VsockAddr) Accept() (SendAddr, error) {
 	return nil, nil
 }
-func (va *VsockAddr) Close() (error) {
+func (va *VsockAddr) Close() error {
 	return nil
 }
